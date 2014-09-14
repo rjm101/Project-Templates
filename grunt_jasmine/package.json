@@ -1,0 +1,36 @@
+{
+  "name": "Project-name",
+  "description": "",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@maven-host.com:project-name"
+  },
+  "author": "Richard",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "0.1.11",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-connect": "~0.6.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-jasmine": "^0.7.0",
+    "grunt-contrib-sass": "~0.7.3",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-include-replace": "~1.2.0",
+    "grunt-newer": "~0.7.0",
+    "grunt-notify": "~0.2.20",
+    "grunt-reload": "~0.2.0"
+  },
+  "appFiles": [
+    "app/js/main.js"
+  ],
+  "libFiles": [
+    "app/libs/ftlabs.fastclick.js",
+    "app/libs/html5shiv.js",
+    "app/libs/jquery-1.10.1.min.js",
+    "app/libs/respond-1.1.0.min.js"
+  ]
+}
