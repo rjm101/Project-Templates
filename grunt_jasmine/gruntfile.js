@@ -56,11 +56,14 @@ module.exports = function(grunt) {
 				files: ['app/sass/**/*.scss'],
 				tasks: ['sass:dev']
 			},
+			partials:{
+				files: ['app/**/*.html'],
+				tasks: ['includereplace']
+			},
 			other:{
 				files: [
 					'app/fonts/**/*',
-					'app/img/**/*',
-					'app/**/*.html'
+					'app/img/**/*'
 				],
 				tasks: ['copy:assets']
 			}
@@ -70,7 +73,18 @@ module.exports = function(grunt) {
 		/*
 		 * Dev and deploy tasks
 		 */ 
-
+		
+		// Add templates to HTML file
+		includereplace: {
+			dist: {
+				files: [{
+					src: 'index.html',
+					dest: 'dist/',
+					expand: true,
+					cwd: 'app/'
+				}]
+			}
+		},
 
 		// Uglify JavaScript files
 		uglify:{
@@ -83,12 +97,12 @@ module.exports = function(grunt) {
 					compress: false
 				},
 				files:{
-					'dist/js/scripts.min.js': appFiles
+					'dist/js/app.scripts.js': appFiles
 				}
 			},
 			deploy:{
 				files:{
-					'dist/js/scripts.min.js': appFiles
+					'dist/js/app.scripts.js': appFiles
 				}
 			},
 			libs: {
@@ -116,7 +130,7 @@ module.exports = function(grunt) {
 					lineNumbers: true
 				},
 				files: {
-					'/dist/css/styles.css': 'app/sass/compiled.scss'
+					'dist/css/app.styles.css': 'app/sass/compiled.scss'
 				}
 			},
 			deploy: {
@@ -125,7 +139,7 @@ module.exports = function(grunt) {
 					sourcemap: 'none'
 				},
 				files: {
-					'/dist/css/styles.css': 'app/sass/compiled.scss'
+					'dist/css/app.styles.css': 'app/sass/compiled.scss'
 				}
 			}
 		},
@@ -160,8 +174,7 @@ module.exports = function(grunt) {
 					cwd: 'app/',
 					src: [
 						'fonts/**/*',
-						'img/**/*',
-						'**/*.html'
+						'img/**/*'
 					],
 					dest: 'dist/'
 				}]
@@ -188,6 +201,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');  // Uglify JS files
 	grunt.loadNpmTasks('grunt-contrib-sass');    // SASS Compiler
 	grunt.loadNpmTasks('grunt-contrib-copy');    // Copy directories
+	grunt.loadNpmTasks('grunt-include-replace'); // Compile html partials into main html files
 	grunt.loadNpmTasks('grunt-contrib-connect'); // Localhost
 	grunt.loadNpmTasks('grunt-contrib-watch');   // Watch for file changes
 	grunt.loadNpmTasks('grunt-contrib-jasmine'); // For jasmine testing
@@ -206,6 +220,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('dev', [
 		'messageTask:dev', 
 		'clean',
+		'includereplace',
 		'sass:dev',
 		'uglify:dev',
 		'uglify:libs', 
@@ -217,6 +232,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('deploy', [
 		'messageTask:deploy', 
 		'clean',  
+		'includereplace',
 		'uglify:deploy', 
 		'uglify:libs', 
 		'sass:deploy', 

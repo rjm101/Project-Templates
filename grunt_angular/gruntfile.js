@@ -119,12 +119,12 @@ module.exports = function(grunt) {
 					compress: false
 				},
 				files:{
-					'dist/js/scripts.min.js': ['app/temp/scripts.annotated.js', 'app/temp/templates.js']
+					'dist/js/app.scripts.js': ['app/temp/scripts.annotated.js', 'app/temp/templates.js']
 				}
 			},
 			deploy:{
 				files:{
-					'dist/js/scripts.min.js': ['app/temp/scripts.annotated.js', 'app/temp/templates.js']
+					'dist/js/app.scripts.js': ['app/temp/scripts.annotated.js', 'app/temp/templates.js']
 				}
 			},
 			libs: {
@@ -152,7 +152,7 @@ module.exports = function(grunt) {
 					lineNumbers: true
 				},
 				files: {
-					'dist/css/styles.css': 'app/sass/compiled.scss'
+					'dist/css/app.styles.css': 'app/sass/compiled.scss'
 				}
 			},
 			deploy: {
@@ -161,7 +161,7 @@ module.exports = function(grunt) {
 					sourcemap: 'none'
 				},
 				files: {
-					'dist/css/styles.css': 'app/sass/compiled.scss'
+					'dist/css/app.styles.css': 'app/sass/compiled.scss'
 				}
 			}
 		},
